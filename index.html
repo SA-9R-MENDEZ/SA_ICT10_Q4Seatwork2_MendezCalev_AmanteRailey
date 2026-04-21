@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grade 10 Classmates System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(246, 154, 154, 0.1);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      background: #ff8cea;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .classmate-item {
+      background: #f9f9f9;
+      padding: 12px;
+      margin-top: 10px;
+      border-left: 5px solid #ff64e8;
+      border-radius: 5px;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Grade 10 Classmates System</h1>
+
+    <input type="text" id="name" placeholder="Enter classmate name">
+    <input type="text" id="section" placeholder="Enter section">
+    <input type="text" id="favoriteSubject" placeholder="Enter favorite subject">
+    <button onclick="addClassmate()">Add Classmate</button>
+
+    <h2>Classmate List</h2>
+    <div id="classmateList"></div>
+  </div>
+
+  <script>
+    class Classmate {
+      constructor(name, section, favorite_subject) {
+        this.name = name;
+        this.section = section;
+        this.favorite_subject = favorite_subject;
+      }
+
+      introduce() {
+        return `Hi, my name is ${this.name}. I am from section ${this.section}, and my favorite subject is ${this.favorite_subject}.`;
+      }
+    }
+
+    let classmates = [
+      new Classmate("Railey Amante", "10-R", "English"),
+      new Classmate("Sarveen Gill", "10-R", "Mathematics"),
+      new Classmate("Nicolle Tomas", "10-R", "Science"),
+      new Classmate("Sasha Ignacio", "10-R", "Physical Education"),
+      new Classmate("Enya Flores", "10-R", "Philosophy")
+    ];
+
+    function displayClassmates() {
+      const list = document.getElementById("classmateList");
+      list.innerHTML = "";
+
+      for (let classmate of classmates) {
+        const div = document.createElement("div");
+        div.className = "classmate-item";
+        div.textContent = classmate.introduce();
+        list.appendChild(div);
+      }
+    }
+
+    function addClassmate() {
+      const name = document.getElementById("name").value.trim();
+      const section = document.getElementById("section").value.trim();
+      const favoriteSubject = document.getElementById("favoriteSubject").value.trim();
+
+      if (!name || !section || !favoriteSubject) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      classmates.push(new Classmate(name, section, favoriteSubject));
+
+      document.getElementById("name").value = "";
+      document.getElementById("section").value = "";
+      document.getElementById("favoriteSubject").value = "";
+
+      displayClassmates();
+    }
+
+    displayClassmates();
+  </script>
+</body>
+</html>
+    
